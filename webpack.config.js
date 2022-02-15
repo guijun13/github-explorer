@@ -7,13 +7,13 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 module.exports = {
   mode: isDevelopment ? 'development' : 'production',
   devtool: isDevelopment ? 'eval-source-map' : 'source-map', // shows the error in the correct line
-  entry: path.resolve(__dirname, 'src', 'index.jsx'),
+  entry: path.resolve(__dirname, 'src', 'index.tsx'),
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   devServer: {
     static: path.resolve(__dirname, 'public'), // hot-reload
@@ -29,7 +29,7 @@ module.exports = {
     rules: [
       {
         // rules for .jsx files
-        test: /\.jsx$/,
+        test: /\.(j|t)sx$/, // allow both jsx and tsx
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
